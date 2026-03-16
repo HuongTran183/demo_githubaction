@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">CV Cá Nhân</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            color: #1f2937;
+            padding: 30px;
+        }
+
+        .cv-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 40px 25px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            background: #fff;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .position {
+            font-size: 16px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-section {
+            text-align: left;
+            margin-top: 28px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.35);
+            padding-bottom: 8px;
+        }
+
+        .sidebar-section p,
+        .sidebar-section a,
+        .sidebar-section li {
+            font-size: 15px;
+            line-height: 1.8;
+            color: white;
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        .sidebar-section ul {
+            padding-left: 18px;
+        }
+
+        .social a {
+            display: block;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .social a:hover {
+            color: #dbeafe;
+            transform: translateX(4px);
+        }
+
+        .main-content {
+            padding: 40px;
+            background: #ffffff;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            color: #1d4ed8;
+            margin-bottom: 14px;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #3b82f6;
+            margin-top: 8px;
+            border-radius: 10px;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .skill-item {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid #bfdbfe;
+        }
+
+        .contact-box {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-top: 10px;
+        }
+
+        .contact-box p {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        @media (max-width: 860px) {
+            .cv-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                padding: 30px 20px;
+            }
+
+            .main-content {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="cv-container">
+    <aside class="sidebar">
+        <img th:src="${avatar}" alt="Ảnh đại diện" class="avatar">
+
+        <div class="name" th:text="${name}">Trần Kim Hương</div>
+        <div class="position" th:text="${position}">Java Backend Developer / Sinh viên CNTT</div>
+
+        <div class="sidebar-section">
+            <h3>Liên hệ</h3>
+            <p><strong>Email:</strong> <span th:text="${email}">@gmail.com</span></p>
+            <p><strong>Điện thoại:</strong> <span th:text="${phone}">0842782478</span></p>
+            <p><strong>Địa chỉ:</strong> <span th:text="${address}">Thủ Đức</span></p>
+        </div>
+
+        <div class="sidebar-section social">
+            <h3>Mạng xã hội</h3>
+            <a th:href="${facebook}" target="_blank">Facebook</a>
+            <a th:href="${github}" target="_blank">GitHub</a>
+            <a th:href="${linkedin}" target="_blank">LinkedIn</a>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Học vấn</h3>
+            <p th:text="${education}">Sinh viên Công nghệ Thông tin</p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <section class="section">
+            <h2>Giới thiệu</h2>
+            <p th:text="${intro}">
+                Xin chào! Mình là Trần Kim Hương, đam mê phát triển ứng dụng web với Java Spring Boot.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Mục tiêu nghề nghiệp</h2>
+            <p th:text="${careerGoal}">
+                Mục tiêu của mình là trở thành Java Backend Developer chuyên nghiệp.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Kỹ năng</h2>
+            <div class="skills">
+                <span class="skill-item" th:each="skill : ${skills}" th:text="${skill}">Java</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Thông tin nhanh</h2>
+            <div class="contact-box">
+                <p><span class="highlight">Họ và tên:</span> <span th:text="${name}">Trần Kim Hương</span></p>
+                <p><span class="highlight">Vị trí mong muốn:</span> <span th:text="${position}">Java Backend Developer</span></p>
+                <p><span class="highlight">Email:</span> <span th:text="${email}">example@gmail.com</span></p>
+                <p><span class="highlight">Số điện thoại:</span> <span th:text="${phone}">084 278 2478</span></p>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>
