@@ -1,0 +1,36 @@
+name: Build, Push and Run Docker Container
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6.0.2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v4.0.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v7.0.0
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            kimhuong183/demodockerjava:latest
+            kimhuong183/demodockerjava:${{ github.sha }}
+
+      - name: Run container on GitHub runner
+        run: |
+          docker rm -f demojava || true
+          docker run --name demojava -d -p 8080:8080 kimhuong183/demodockerjava:latest
+          docker ps
